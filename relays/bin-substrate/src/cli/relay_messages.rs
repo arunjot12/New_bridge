@@ -23,9 +23,9 @@ use crate::chains::{
 	bridge_hub_rococo_messages_to_bridge_hub_wococo::BridgeHubRococoToBridgeHubWococoMessagesCliBridge,
 	bridge_hub_wococo_messages_to_bridge_hub_rococo::BridgeHubWococoToBridgeHubRococoMessagesCliBridge,
 	millau_headers_to_rialto::MillauToRialtoCliBridge,
-	millau_headers_to_rialto_parachain::MillauToRialtoParachainCliBridge,
+	//millau_headers_to_rialto_parachain::MillauToRialtoParachainCliBridge,
 	rialto_headers_to_millau::RialtoToMillauCliBridge,
-	rialto_parachains_to_millau::RialtoParachainToMillauCliBridge,
+	//rialto_parachains_to_millau::RialtoParachainToMillauCliBridge,
 };
 use relay_substrate_client::{AccountIdOf, AccountKeyPairOf, BalanceOf, ChainWithTransactions};
 use substrate_relay_helper::{messages_lane::MessagesRelayParams, TransactionParams};
@@ -92,8 +92,8 @@ where
 
 impl MessagesRelayer for MillauToRialtoCliBridge {}
 impl MessagesRelayer for RialtoToMillauCliBridge {}
-impl MessagesRelayer for MillauToRialtoParachainCliBridge {}
-impl MessagesRelayer for RialtoParachainToMillauCliBridge {}
+//impl MessagesRelayer for MillauToRialtoParachainCliBridge {}
+//impl MessagesRelayer for RialtoParachainToMillauCliBridge {}
 impl MessagesRelayer for BridgeHubRococoToBridgeHubWococoMessagesCliBridge {}
 impl MessagesRelayer for BridgeHubWococoToBridgeHubRococoMessagesCliBridge {}
 
@@ -103,14 +103,16 @@ impl RelayMessages {
 		match self.bridge {
 			FullBridge::MillauToRialto => MillauToRialtoCliBridge::relay_messages(self),
 			FullBridge::RialtoToMillau => RialtoToMillauCliBridge::relay_messages(self),
-			FullBridge::MillauToRialtoParachain =>
-				MillauToRialtoParachainCliBridge::relay_messages(self),
-			FullBridge::RialtoParachainToMillau =>
-				RialtoParachainToMillauCliBridge::relay_messages(self),
+			//FullBridge::MillauToRialtoParachain =>
+				//MillauToRialtoParachainCliBridge::relay_messages(self),
+			// FullBridge::RialtoParachainToMillau =>
+			// 	RialtoParachainToMillauCliBridge::relay_messages(self),
 			FullBridge::BridgeHubRococoToBridgeHubWococo =>
 				BridgeHubRococoToBridgeHubWococoMessagesCliBridge::relay_messages(self),
 			FullBridge::BridgeHubWococoToBridgeHubRococo =>
 				BridgeHubWococoToBridgeHubRococoMessagesCliBridge::relay_messages(self),
+   // FullBridge::MillauToRialtoParachain => todo!(),
+   // FullBridge::RialtoParachainToMillau => todo!(),
 		}
 		.await
 	}

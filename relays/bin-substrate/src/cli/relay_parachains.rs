@@ -15,7 +15,7 @@
 // along with Parity Bridges Common.  If not, see <http://www.gnu.org/licenses/>.
 
 use crate::chains::{
-	rialto_parachains_to_millau::RialtoParachainToMillauCliBridge,
+	//rialto_parachains_to_millau::RialtoParachainToMillauCliBridge,
 	rococo_parachains_to_bridge_hub_wococo::BridgeHubRococoToBridgeHubWococoCliBridge,
 	westend_parachains_to_millau::WestmintToMillauCliBridge,
 	wococo_parachains_to_bridge_hub_rococo::BridgeHubWococoToBridgeHubRococoCliBridge,
@@ -120,7 +120,7 @@ where
 	}
 }
 
-impl ParachainsRelayer for RialtoParachainToMillauCliBridge {}
+//impl ParachainsRelayer for RialtoParachainToMillauCliBridge {}
 
 impl ParachainsRelayer for WestmintToMillauCliBridge {}
 
@@ -132,8 +132,10 @@ impl RelayParachains {
 	/// Run the command.
 	pub async fn run(self) -> anyhow::Result<()> {
 		match self.bridge {
-			RelayParachainsBridge::RialtoToMillau =>
-				RialtoParachainToMillauCliBridge::relay_headers(self),
+		//	RelayHeadersAndMessages::MillauRialtoParachain(_) => todo!(),
+
+		RelayParachainsBridge::RialtoToMillau => todo!(),
+			// 	RialtoParachainToMillauCliBridge::relay_headers(self),
 			RelayParachainsBridge::WestendToMillau =>
 				WestmintToMillauCliBridge::relay_headers(self),
 			RelayParachainsBridge::BridgeHubRococoToBridgeHubWococo =>

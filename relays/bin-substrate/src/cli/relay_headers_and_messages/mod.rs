@@ -41,9 +41,9 @@ use relay_to_relay::*;
 use crate::{
 	chains::{
 		millau_headers_to_rialto::MillauToRialtoCliBridge,
-		millau_headers_to_rialto_parachain::MillauToRialtoParachainCliBridge,
+		//millau_headers_to_rialto_parachain::MillauToRialtoParachainCliBridge,
 		rialto_headers_to_millau::RialtoToMillauCliBridge,
-		rialto_parachains_to_millau::RialtoParachainToMillauCliBridge,
+		//rialto_parachains_to_millau::RialtoParachainToMillauCliBridge,
 		rococo_parachains_to_bridge_hub_wococo::BridgeHubRococoToBridgeHubWococoCliBridge,
 		wococo_parachains_to_bridge_hub_rococo::BridgeHubWococoToBridgeHubRococoCliBridge,
 	},
@@ -405,31 +405,31 @@ impl Full2WayBridge for MillauRialtoFull2WayBridge {
 	}
 }
 
-/// Millau <> RialtoParachain complex relay.
-pub struct MillauRialtoParachainFull2WayBridge {
-	base: <Self as Full2WayBridge>::Base,
-}
+// /// Millau <> RialtoParachain complex relay.
+// pub struct MillauRialtoParachainFull2WayBridge {
+// 	base: <Self as Full2WayBridge>::Base,
+// }
 
-#[async_trait]
-impl Full2WayBridge for MillauRialtoParachainFull2WayBridge {
-	type Base = RelayToParachainBridge<Self::L2R, Self::R2L>;
-	type Left = relay_millau_client::Millau;
-	type Right = relay_rialto_parachain_client::RialtoParachain;
-	type L2R = MillauToRialtoParachainCliBridge;
-	type R2L = RialtoParachainToMillauCliBridge;
+// #[async_trait]
+// impl Full2WayBridge for MillauRialtoParachainFull2WayBridge {
+// 	//type Base = RelayToParachainBridge<Self::L2R, Self::R2L>;
+// 	type Left = relay_millau_client::Millau;
+// 	type Right = relay_rialto_parachain_client::RialtoParachain;
+// 	//type L2R = MillauToRialtoParachainCliBridge;
+// 	type R2L = RialtoParachainToMillauCliBridge;
 
-	fn new(base: Self::Base) -> anyhow::Result<Self> {
-		Ok(Self { base })
-	}
+// 	fn new(base: Self::Base) -> anyhow::Result<Self> {
+// 		Ok(Self { base })
+// 	}
 
-	fn base(&self) -> &Self::Base {
-		&self.base
-	}
+// 	fn base(&self) -> &Self::Base {
+// 		&self.base
+// 	}
 
-	fn mut_base(&mut self) -> &mut Self::Base {
-		&mut self.base
-	}
-}
+// 	fn mut_base(&mut self) -> &mut Self::Base {
+// 		&mut self.base
+// 	}
+// }
 
 /// BridgeHubRococo <> BridgeHubWococo complex relay.
 pub struct BridgeHubRococoBridgeHubWococoFull2WayBridge {
@@ -463,7 +463,7 @@ pub enum RelayHeadersAndMessages {
 	/// Millau <> Rialto relay.
 	MillauRialto(MillauRialtoHeadersAndMessages),
 	/// Millau <> RialtoParachain relay.
-	MillauRialtoParachain(MillauRialtoParachainHeadersAndMessages),
+	//MillauRialtoParachain(MillauRialtoParachainHeadersAndMessages),
 	/// BridgeHubRococo <> BridgeHubWococo relay.
 	BridgeHubRococoBridgeHubWococo(BridgeHubRococoBridgeHubWococoHeadersAndMessages),
 }
@@ -474,10 +474,10 @@ impl RelayHeadersAndMessages {
 		match self {
 			RelayHeadersAndMessages::MillauRialto(params) =>
 				MillauRialtoFull2WayBridge::new(params.into_bridge().await?)?.run().await,
-			RelayHeadersAndMessages::MillauRialtoParachain(params) =>
-				MillauRialtoParachainFull2WayBridge::new(params.into_bridge().await?)?
-					.run()
-					.await,
+			// RelayHeadersAndMessages::MillauRialtoParachain(params) =>
+			// 	MillauRialtoParachainFull2WayBridge::new(params.into_bridge().await?)?
+			// 		.run()
+			// 		.await,
 			RelayHeadersAndMessages::BridgeHubRococoBridgeHubWococo(params) =>
 				BridgeHubRococoBridgeHubWococoFull2WayBridge::new(params.into_bridge().await?)?
 					.run()

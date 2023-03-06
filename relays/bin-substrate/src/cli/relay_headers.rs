@@ -22,7 +22,7 @@ use strum::{EnumString, EnumVariantNames, VariantNames};
 
 use crate::chains::{
 	millau_headers_to_rialto::MillauToRialtoCliBridge,
-	millau_headers_to_rialto_parachain::MillauToRialtoParachainCliBridge,
+	//millau_headers_to_rialto_parachain::MillauToRialtoParachainCliBridge,
 	rialto_headers_to_millau::RialtoToMillauCliBridge,
 	rococo_headers_to_bridge_hub_wococo::RococoToBridgeHubWococoCliBridge,
 	westend_headers_to_millau::WestendToMillauCliBridge,
@@ -60,7 +60,7 @@ pub enum RelayHeadersBridge {
 	MillauToRialto,
 	RialtoToMillau,
 	WestendToMillau,
-	MillauToRialtoParachain,
+	// MillauToRialtoParachain,
 	RococoToBridgeHubWococo,
 	WococoToBridgeHubRococo,
 }
@@ -106,7 +106,7 @@ where
 impl HeadersRelayer for MillauToRialtoCliBridge {}
 impl HeadersRelayer for RialtoToMillauCliBridge {}
 impl HeadersRelayer for WestendToMillauCliBridge {}
-impl HeadersRelayer for MillauToRialtoParachainCliBridge {}
+//impl HeadersRelayer for MillauToRialtoParachainCliBridge {}
 impl HeadersRelayer for RococoToBridgeHubWococoCliBridge {}
 impl HeadersRelayer for WococoToBridgeHubRococoCliBridge {}
 
@@ -117,8 +117,8 @@ impl RelayHeaders {
 			RelayHeadersBridge::MillauToRialto => MillauToRialtoCliBridge::relay_headers(self),
 			RelayHeadersBridge::RialtoToMillau => RialtoToMillauCliBridge::relay_headers(self),
 			RelayHeadersBridge::WestendToMillau => WestendToMillauCliBridge::relay_headers(self),
-			RelayHeadersBridge::MillauToRialtoParachain =>
-				MillauToRialtoParachainCliBridge::relay_headers(self),
+			//RelayHeadersBridge::MillauToRialtoParachain =>
+				//MillauToRialtoParachainCliBridge::relay_headers(self),
 			RelayHeadersBridge::RococoToBridgeHubWococo =>
 				RococoToBridgeHubWococoCliBridge::relay_headers(self),
 			RelayHeadersBridge::WococoToBridgeHubRococo =>

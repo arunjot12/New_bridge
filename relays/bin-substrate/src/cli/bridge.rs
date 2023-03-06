@@ -30,8 +30,8 @@ use substrate_relay_helper::{
 pub enum FullBridge {
 	MillauToRialto,
 	RialtoToMillau,
-	MillauToRialtoParachain,
-	RialtoParachainToMillau,
+	//MillauToRialtoParachain,
+	//RialtoParachainToMillau,
 	BridgeHubRococoToBridgeHubWococo,
 	BridgeHubWococoToBridgeHubRococo,
 }
@@ -42,8 +42,8 @@ impl FullBridge {
 		match self {
 			Self::MillauToRialto => MILLAU_TO_RIALTO_INDEX,
 			Self::RialtoToMillau => RIALTO_TO_MILLAU_INDEX,
-			Self::MillauToRialtoParachain => MILLAU_TO_RIALTO_PARACHAIN_INDEX,
-			Self::RialtoParachainToMillau => RIALTO_PARACHAIN_TO_MILLAU_INDEX,
+			// Self::MillauToRialtoParachain => MILLAU_TO_RIALTO_PARACHAIN_INDEX,
+			// Self::RialtoParachainToMillau => RIALTO_PARACHAIN_TO_MILLAU_INDEX,
 			Self::BridgeHubRococoToBridgeHubWococo | Self::BridgeHubWococoToBridgeHubRococo =>
 				unimplemented!("Relay doesn't support send-message subcommand on bridge hubs"),
 		}

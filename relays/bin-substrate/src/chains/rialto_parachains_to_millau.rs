@@ -50,21 +50,21 @@ pub type RialtoParachainsToMillauSubmitParachainHeadsCallBuilder =
 		millau_runtime::WithRialtoParachainsInstance,
 	>;
 
-//// `RialtoParachain` to `Millau` bridge definition.
-pub struct RialtoParachainToMillauCliBridge {}
+// //// `RialtoParachain` to `Millau` bridge definition.
+// pub struct RialtoParachainToMillauCliBridge {}
 
-impl CliBridgeBase for RialtoParachainToMillauCliBridge {
-	type Source = RialtoParachain;
-	type Target = Millau;
-}
+// impl CliBridgeBase for RialtoParachainToMillauCliBridge {
+// 	type Source = RialtoParachain;
+// 	type Target = Millau;
+// }
 
-impl ParachainToRelayHeadersCliBridge for RialtoParachainToMillauCliBridge {
-	type SourceRelay = Rialto;
-	type ParachainFinality = RialtoParachainsToMillau;
-	type RelayFinality = crate::chains::rialto_headers_to_millau::RialtoFinalityToMillau;
-}
+// impl ParachainToRelayHeadersCliBridge for RialtoParachainToMillauCliBridge {
+// 	type SourceRelay = Rialto;
+// 	type ParachainFinality = RialtoParachainsToMillau;
+// 	type RelayFinality = crate::chains::rialto_headers_to_millau::RialtoFinalityToMillau;
+// }
 
-impl MessagesCliBridge for RialtoParachainToMillauCliBridge {
-	type MessagesLane =
-		crate::chains::rialto_parachain_messages_to_millau::RialtoParachainMessagesToMillau;
-}
+// impl MessagesCliBridge for RialtoParachainToMillauCliBridge {
+// 	type MessagesLane =
+// 		crate::chains::rialto_parachain_messages_to_millau::RialtoParachainMessagesToMillau;
+// }

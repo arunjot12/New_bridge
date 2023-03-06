@@ -31,6 +31,7 @@ use frame_support::{
 	weights::{constants::WEIGHT_REF_TIME_PER_SECOND, IdentityFee, Weight},
 	RuntimeDebug,
 };
+use sp_runtime::traits::BlakeTwo256;
 use frame_system::limits;
 use scale_info::TypeInfo;
 use sp_core::{storage::StateVersion, Hasher as HasherT};
@@ -124,10 +125,10 @@ pub mod time_units {
 pub type BlockNumber = u64;
 
 /// Hash type used in Millau.
-pub type Hash = <BlakeTwoAndKeccak256 as HasherT>::Out;
+pub type Hash = <BlakeTwo256 as HasherT>::Out;
 
 /// Type of object that can produce hashes on Millau.
-pub type Hasher = BlakeTwoAndKeccak256;
+pub type Hasher = BlakeTwo256;
 
 /// The header type used by Millau.
 pub type Header = sp_runtime::generic::Header<BlockNumber, Hasher>;

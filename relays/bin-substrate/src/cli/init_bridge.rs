@@ -20,7 +20,7 @@ use codec::Encode;
 use crate::{
 	chains::{
 		millau_headers_to_rialto::MillauToRialtoCliBridge,
-		millau_headers_to_rialto_parachain::MillauToRialtoParachainCliBridge,
+		//millau_headers_to_rialto_parachain::MillauToRialtoParachainCliBridge,
 		rialto_headers_to_millau::RialtoToMillauCliBridge,
 		rococo_headers_to_bridge_hub_wococo::RococoToBridgeHubWococoCliBridge,
 		westend_headers_to_millau::WestendToMillauCliBridge,
@@ -59,7 +59,7 @@ pub enum InitBridgeName {
 	MillauToRialto,
 	RialtoToMillau,
 	WestendToMillau,
-	MillauToRialtoParachain,
+	//MillauToRialtoParachain,
 	RococoToBridgeHubWococo,
 	WococoToBridgeHubRococo,
 }
@@ -117,22 +117,22 @@ impl BridgeInitializer for MillauToRialtoCliBridge {
 	}
 }
 
-impl BridgeInitializer for MillauToRialtoParachainCliBridge {
-	type Engine = GrandpaFinalityEngine<Self::Source>;
+// impl BridgeInitializer for MillauToRialtoParachainCliBridge {
+// 	type Engine = GrandpaFinalityEngine<Self::Source>;
 
-	fn encode_init_bridge(
-		init_data: <Self::Engine as Engine<Self::Source>>::InitializationData,
-	) -> <Self::Target as Chain>::Call {
-		type RuntimeCall = relay_rialto_parachain_client::RuntimeCall;
-		type BridgeGrandpaCall = relay_rialto_parachain_client::BridgeGrandpaCall;
-		type SudoCall = relay_rialto_parachain_client::SudoCall;
+// 	fn encode_init_bridge(
+// 		init_data: <Self::Engine as Engine<Self::Source>>::InitializationData,
+// 	) -> <Self::Target as Chain>::Call {
+// 		type RuntimeCall = relay_rialto_parachain_client::RuntimeCall;
+// 		type BridgeGrandpaCall = relay_rialto_parachain_client::BridgeGrandpaCall;
+// 		type SudoCall = relay_rialto_parachain_client::SudoCall;
 
-		let initialize_call =
-			RuntimeCall::BridgeMillauGrandpa(BridgeGrandpaCall::initialize { init_data });
+// 		let initialize_call =
+// 			RuntimeCall::BridgeMillauGrandpa(BridgeGrandpaCall::initialize { init_data });
 
-		RuntimeCall::Sudo(SudoCall::sudo { call: Box::new(initialize_call) })
-	}
-}
+// 		RuntimeCall::Sudo(SudoCall::sudo { call: Box::new(initialize_call) })
+// 	}
+// }
 
 impl BridgeInitializer for RialtoToMillauCliBridge {
 	type Engine = GrandpaFinalityEngine<Self::Source>;
@@ -205,12 +205,13 @@ impl InitBridge {
 			InitBridgeName::MillauToRialto => MillauToRialtoCliBridge::init_bridge(self),
 			InitBridgeName::RialtoToMillau => RialtoToMillauCliBridge::init_bridge(self),
 			InitBridgeName::WestendToMillau => WestendToMillauCliBridge::init_bridge(self),
-			InitBridgeName::MillauToRialtoParachain =>
-				MillauToRialtoParachainCliBridge::init_bridge(self),
+			//InitBridgeName::MillauToRialtoParachain =>
+				//MillauToRialtoParachainCliBridge::init_bridge(self),
 			InitBridgeName::RococoToBridgeHubWococo =>
 				RococoToBridgeHubWococoCliBridge::init_bridge(self),
 			InitBridgeName::WococoToBridgeHubRococo =>
 				WococoToBridgeHubRococoCliBridge::init_bridge(self),
+    //InitBridgeName::MillauToRialtoParachain => todo!(),
 		}
 		.await
 	}

@@ -17,9 +17,9 @@
 use crate::{
 	chains::{
 		millau_headers_to_rialto::MillauToRialtoCliBridge,
-		millau_headers_to_rialto_parachain::MillauToRialtoParachainCliBridge,
+		//millau_headers_to_rialto_parachain::MillauToRialtoParachainCliBridge,
 		rialto_headers_to_millau::RialtoToMillauCliBridge,
-		rialto_parachains_to_millau::RialtoParachainToMillauCliBridge,
+		//rialto_parachains_to_millau::RialtoParachainToMillauCliBridge,
 	},
 	cli::{
 		bridge::{FullBridge, MessagesCliBridge},
@@ -95,8 +95,8 @@ where
 
 impl MessageSender for MillauToRialtoCliBridge {}
 impl MessageSender for RialtoToMillauCliBridge {}
-impl MessageSender for MillauToRialtoParachainCliBridge {}
-impl MessageSender for RialtoParachainToMillauCliBridge {}
+//impl MessageSender for MillauToRialtoParachainCliBridge {}
+//impl MessageSender for RialtoParachainToMillauCliBridge {}
 
 impl SendMessage {
 	/// Run the command.
@@ -104,10 +104,10 @@ impl SendMessage {
 		match self.bridge {
 			FullBridge::MillauToRialto => MillauToRialtoCliBridge::send_message(self),
 			FullBridge::RialtoToMillau => RialtoToMillauCliBridge::send_message(self),
-			FullBridge::MillauToRialtoParachain =>
-				MillauToRialtoParachainCliBridge::send_message(self),
-			FullBridge::RialtoParachainToMillau =>
-				RialtoParachainToMillauCliBridge::send_message(self),
+			//FullBridge::MillauToRialtoParachain =>
+				//MillauToRialtoParachainCliBridge::send_message(self),
+			// FullBridge::RialtoParachainToMillau =>
+			// 	RialtoParachainToMillauCliBridge::send_message(self),
 			FullBridge::BridgeHubRococoToBridgeHubWococo => unimplemented!(
 				"Sending message from BridgeHubRococo to BridgeHubWococo is not supported"
 			),
